@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html lang="it"><head>
+  <meta charset="utf-8" >	<!--  nella visualizzazione della pagina web utilizza la codifica utf-8 e mostra correttamente le lettere accentate. Da mettere come prima linea dei <meta> -->
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type"><title>Sito di Antonio Bellini</title>
+  <meta content="lmpbe@tin.it" name="author">
+  <meta content="Sito di Antonio Bellini" name="description">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+ <style type="text/css">
+
+nav {
+background: yellow;
+line-height: 2.5em;
+font-family: sans-serif;
+font-size: 16px;}
+
+a:hover {
+  background-color: #ffcc33;
+}
+
+/* USA QUESTO FILE HTML COME TEMPLATE - INSERISCI 	STILI 	DEI NUOVI PROGRAMMI DA QUI IN POI  fino a </style_>	   */
+
+.bb_1 {height: 100px; width: 27%; font-size: 1.2em; margin: 10px; background-color:}	 	/* class con stile del bottone*/
+.bb_0 {font-family: Courier; letter-spacing: 2px; font-size: 150%}
+
+ </style>
+
+<nav>
+<a style="font-weight: bold;" href="../index.html">HOME</a>
+</nav>
+
+<hr style="width: 100%; height: 2px;"><br>
+
+<!-- USA QUESTO FILE HTML COME TEMPLATE - INSERISCI  	BODY E SCRIPT 	DEI NUOVI PROGRAMMI DA QUI IN POI  fino a </script></body> -->
+
+<body>
+<div style="margin-left: 10px;">
+
+<h1 style="color:black">Gioco di memoria - Ricorda una stringa.</h1>
+
+<p>
+Si può giocare anche fra due o più giocatori, ognuno dal proprio smartphone. Tutti iniziano il gioco contemporaneamente. Ognuno prende tanti punti quanti sono i caratteri della propria stringa che ha sbagliato (pari al numero di punti interrogativi che appaiono a video). Il giocatore col punteggio minore vince.
+</p>
+
+
+	<form>
+	<button type="button" id='b_1' class="bb_1" onClick="bott6()">6 caratteri</button>		<!-- inserisce bottone nel DOM. L'etichetta è interna al bottone -->
+	<button type="button" id='b_2' class="bb_1" onClick="bott9()">9 caratteri</button>		<!-- inserisce altro bottone nel DOM. Se alla fine di ogni riga si inserisce <br> i bottoni si dispongono in verticale -->
+	<button type="button" id='b_3' class="bb_1" onClick="bott11()">11 caratteri</button>		<!-- inserisce altro bottone nel DOM -->
+	</form>
+<br><br>
+
+<h2 id="par" class="bb_0" style="color:black" >Stringa da ricordare</h2>
+<h2 id="par2" class="bb_0" style="color:blue">Stringa ricordata </h2>
+<h2 id="par3" class="bb_0" style="color:red">Errori commessi</h2>
+
+<script>
+
+simboli='ABCDEFGHIJKLMNOPQRSTUVWXYZ'		// simboli che formano la stringa da indovinare
+
+parola=''	// definizione variabili
+lunga=0
+indovina=''
+paragone=''
+
+bott6=function(){gioca(6); disableButton(); setTimeout(enableButton, 10)};
+bott9=function(){gioca(9); disableButton(); setTimeout(enableButton, 10)};
+bott11=function(){gioca(11); disableButton(); setTimeout(enableButton, 10)};
+disableButton= function() {document.getElementById('b_1').disabled = true};		// definisce funzione disabilita bottone (disabled = true)
+enableButton= function() {document.getElementById('b_1').disabled = false};		// definisce funzione abilita bottone (disabled = false)
+
+gioca=function(a_1){parola=''; paragone=''; indovina=''; lunga=a_1; 	// resetta le variabili per eventuali giochi successivi
+document.getElementById('par2').innerHTML='Stringa ricordata' 		// riscrive etichette per eventuali giochi successivi
+document.getElementById('par3').innerHTML='Errori commessi'
+
+scrivi(); console.log(parola);  	// lancia scrivi() che scrive la stringa casuale da indovinare
+setTimeout (function(){indovina = prompt("indovina la stringa di "+lunga+" caratteri");		// dopo 5 sec chiede input utente
+document.getElementById('par2').innerHTML=indovina	 	// scrive input utente
+
+confronta();		// lancia confronta() che scrive il confronto fra stringa da indovinare e input utente
+document.getElementById('par').innerHTML=parola		 	// riscrive la stringa da indovinare che era svanita, per verifica con input utente
+document.getElementById('par').style.opacity = 1		// resetta opacità della stringa
+}, 5000); 
+} //F
+
+scrivi=function(){		// scrive la stringa casuale da indovinare
+for(i=0; i<lunga; i++){
+parola=parola.concat(simboli[Math.floor(Math.random()*simboli.length)])
+}; // FOR
+// $("#par").html(parola).fadeOut(6000); 
+document.getElementById('par').innerHTML=parola
+setTimeout(function(){document.getElementById('par').style.opacity = 0}, 4700);		// fa svanire la stringa dopo 4,7sec
+} // F
+
+confronta=function(){			// confronta stringa da indovinare e input utente e scrive il risultato
+for(i=0; i<lunga; i++){
+if(indovina[i] === undefined){paragone=paragone.concat('?')};	// se la stringa immessa è più corta di quella da indovinare, pone gli undefined come errori
+if(indovina[i] !== undefined){
+	if(indovina[i].toUpperCase() === parola[i]){paragone=paragone.concat('.')};	// mette l'input utente in maiuscolo per il confronto
+	if(indovina[i].toUpperCase() !== parola[i]){paragone=paragone.concat('?')}
+}}; // FOR
+document.getElementById('par3').innerHTML=paragone
+} // F
+
+</script>
+</div>
+</body>
+</html>
+
+<!--
+-->

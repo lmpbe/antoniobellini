@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+
+<html lang="it"><head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type"><title>Sito di Antonio Bellini</title>
+  <meta content="lmpbe@tin.it" name="author">
+  <meta content="Sito di Antonio Bellini" name="description">
+</head>
+
+ <style type="text/css">
+nav {
+background: yellow none repeat scroll 0% 50%;
+line-height: 2.5em; font-size: 180%}
+a:hover {
+  background-color: #ffcc33;
+}
+
+/* USA QUESTO FILE HTML COME TEMPLATE - INSERISCI    STILI    DEI NUOVI PROGRAMMI DA QUI IN POI */
+
+
+ </style>
+
+<body>
+<nav><a style="font-weight: bold; background-color: yellow;" href="../index.html">HOME</a><span style="background-color: yellow;">&nbsp;&nbsp;&nbsp;&nbsp; 
+</span><br>
+</nav>
+<hr style="width: 100%; height: 2px;"><br>
+
+<!-- USA QUESTO FILE HTML COME TEMPLATE - INSERISCI    SCRIPT    DEI NUOVI PROGRAMMI DA QUI IN POI -->
+
+<h3 style="color:black">Il serpente mangia le mele e cresce. Se morde si morde la coda o i bordi muore</h3><br>
+<canvas id="canvas" width="400" height="400"></canvas>
+<p id="vuoto">&nbsp</p>
+
+<script src="jquery-2.1.0.js"></script>
+<script>
+
+//							GIOCO SNAKE
+// Set up canvas 												-pag285 / 256
+canvas = document.getElementById("canvas");
+ctx = canvas.getContext("2d");
+
+// Get the width and height from the canvas element
+width = canvas.width;
+height = canvas.height;
+
+// Work out the width and height in blocks
+blockSize = 10;
+widthInBlocks = width / blockSize;
+heightInBlocks = height / blockSize;
+
+// Set score to 0
+score = 0;
+
+// Draw the border
+drawBorder = function () {
+ctx.fillStyle = "grey";
+ctx.fillRect(0, 0, width, blockSize);
+ctx.fillRect(0, height - blockSize, width, blockSize);
+ctx.fillRect(0, 0, blockSize, height);
+ctx.fillRect(width - blockSize, 0, blockSize, height);
+};
+
+// Draw the score in the top-left corner
+function drawScore() {
+ctx.font = "20px Courier";
+ctx.fillStyle = "Black";
+ctx.textAlign = "left";
+ctx.textBaseline = "top";
+ctx.fillText("Score: " + score, blockSize, blockSize);
+};
+
+// Draw a circle
+circle = function (x, y, radius, fillCircle) {
+ctx.beginPath();
+ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+if (fillCircle) {
+ctx.fill();
+} else {
+ctx.stroke();
+}
+};
+
+// The Block constructor
+Block = function (col, row) {
+this.col = col;
+this.row = row;
+};
+
+// Draw a square at the block's location
+Block.prototype.drawSquare = function (color) {
+x = this.col * blockSize;
+y = this.row * blockSize;
+ctx.fillStyle = color;
+ctx.fillRect(x, y, blockSize, blockSize);
+};
+
+// Draw a circle at the block's location
+Block.prototype.drawCircle = function (color) {
+centerX = this.col * blockSize + blockSize / 2;
+centerY = this.row * blockSize + blockSize / 2;
+ctx.fillStyle = color;
+circle(centerX, centerY, blockSize / 2, true);
+};
+
+// Check if this block is in the same location as another block
+Block.prototype.equal = function (otherBlock) {
+return this.col === otherBlock.col && this.row === otherBlock.row;
+};
+
+// The Snake constructor	 									-pag287
+function Snake() {
+this.segments = [
+new Block(7, 5),
+new Block(6, 5),
+new Block(5, 5)
+];
+this.direction = "right";
+this.nextDirection = "right";
+};
+
+// Draw a square for each segment of the snake's body
+Snake.prototype.draw = function () {
+for (var i = 0; i < this.segments.length; i++) {
+if (i===0) {this.segments[i].drawSquare('red')}		// colora la testa del serpente
+else this.segments[i].drawSquare('blue');
+}
+};
+
+// Moving the Snake - Create a new head and add it to the beginning of the snake to move the snake in its current direction
+Snake.prototype.move = function () {
+head = this.segments[0];
+newHead= 0
+this.direction = this.nextDirection;
+if (this.direction === "right") {
+newHead = new Block(head.col + 1, head.row);
+} else if (this.direction === "down") {
+newHead = new Block(head.col, head.row + 1);
+} else if (this.direction === "left") {
+newHead = new Block(head.col - 1, head.row);
+} else if (this.direction === "up") {
+newHead = new Block(head.col, head.row - 1);
+}
+if (this.checkCollision(newHead)) {		// this indica l'oggetto snake (su cui chiama il metodo checkCollision) non una proprietà dell'oggetto snake
+gameOver();
+return;
+}
+this.segments.unshift(newHead);
+if (newHead.equal(apple.position)) {
+score++;
+apple.move();
+} else {														// segue -pag288
+this.segments.pop();
+}
+};
+
+// Check if the snake's new head has collided with the wall or itself
+Snake.prototype.checkCollision = function (head) {		// qui head è parametro della funzione, non la variabile head = this.segments[0]
+leftCollision = (head.col === 0);
+topCollision = (head.row === 0);
+rightCollision = (head.col === widthInBlocks - 1);
+bottomCollision = (head.row === heightInBlocks - 1);
+wallCollision = leftCollision || topCollision || rightCollision || bottomCollision;
+selfCollision = false;
+for (var i = 0; i < this.segments.length; i++) {
+if (head.equal(this.segments[i])) {
+selfCollision = true;
+}
+}
+return wallCollision || selfCollision;
+};
+
+// Set the snake's next direction based on the keyboard
+Snake.prototype.setDirection = function (newDirection) {		// qui newDirection è parametro della funzione, non la variabile newDirection = directions[event.keyCode]
+if (this.direction === "up" && newDirection === "down") {
+return;
+} else if (this.direction === "right" && newDirection === "left") {
+return;
+} else if (this.direction === "down" && newDirection === "up") {
+return;
+} else if (this.direction === "left" && newDirection === "right") {
+return;
+}
+this.nextDirection = newDirection;
+};
+
+// Creating the Apple - The Apple constructor
+Apple = function () {
+this.position = new Block(10, 10);
+};
+
+// Draw a circle at the apple's location	 								-pag289
+Apple.prototype.draw = function () {
+this.position.drawCircle("LimeGreen");					// this.position indica l'oggetto block(x,y) (su cui chiama il metodo drawCircle) non una proprietà dell'oggetto apple
+};
+
+// Move the apple to a new random location - CON CONTTOLLO NON SOVRAPPOSIZIONE SERPENTE 
+Apple.prototype.move = function () {
+randomCol = Math.floor(Math.random() * (widthInBlocks - 2)) + 1;
+randomRow = Math.floor(Math.random() * (heightInBlocks - 2)) + 1;
+for(i=0; i<snake.segments.length;i++){						// Controlla non sovrapposizione con blocchi del serpente =snake.segments ==> oggetti Block {col: x, row: y}
+if((snake.segments[i].col===randomCol)&&(snake.segments[i].row===randomRow)){apple.move()}
+else break
+}//For
+this.position = new Block(randomCol, randomRow);
+};
+
+// Create the snake and apple objects
+snake = new Snake();
+apple = new Apple();
+
+// Pass an animation function to setInterval - VELOCITà AUMENTA						(anche p254)
+passo= function () {
+ctx.clearRect(0, 0, width, height);
+drawScore();
+snake.move();
+snake.draw();
+apple.draw();
+drawBorder();
+if (snake.checkCollision(newHead)===true){return} else		// impedisce il rinnovo del cilso se snake collide
+clearInterval(intervalId);		// ogni ciclo cancella setInterval
+intervalId = setInterval(passo, 100-2*score)	// poi ogni ciclo richiama setInterval col tempo aggiornato
+}
+intervalId = setInterval(passo, 100-2*score)
+
+// Convert keycodes to directions
+directions = {37: "left", 38: "up", 39: "right", 40: "down"};
+
+// The keydown handler for handling direction key presses
+$("body").keydown(function () {
+newDirection = directions[event.keyCode];
+if (newDirection !== undefined) {
+snake.setDirection(newDirection);
+}
+});
+
+// Ending the Game - Clear the interval and display Game Over text	 			-pag286
+function gameOver() {
+clearInterval(intervalId);
+ctx.font = "60px Courier";
+ctx.fillStyle = "Black";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+ctx.fillText("Game Over", width / 2, height / 2);
+return
+};
+
+</script>
+</body>
+</html>

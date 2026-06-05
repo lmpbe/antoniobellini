@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="it"><head>
+  <meta charset="utf-8" >	<!--  nella visualizzazione della pagina web utilizza la codifica utf-8 e mostra correttamente le lettere accentate. Da mettere come prima linea dei <meta> -->
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type"><title>Sito di Antonio Bellini</title>
+  <meta content="lmpbe@tin.it" name="author">
+  <meta content="Sito di Antonio Bellini" name="description">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+ <style type="text/css">
+
+nav {
+background: yellow;
+line-height: 2.5em;
+font-family: sans-serif;
+font-size: 16px;}
+
+a:hover {
+  background-color: #ffcc33;
+}
+
+/* USA QUESTO FILE HTML COME TEMPLATE - INSERISCI 	STILI 	DEI NUOVI PROGRAMMI DA QUI IN POI  fino a </style_>	   */
+
+.bb_1 {height: 100px; width: 27%; font-size: 1.2em; margin: 10px; background-color:}	 	/* class con stile del bottone*/
+.bb_0 {font-family: Courier; letter-spacing: 2px; font-size: 200%}
+
+ </style>
+
+<nav>
+<a style="font-weight: bold;" href="../index.html">HOME</a>
+</nav>
+
+<hr style="width: 100%; height: 2px;"><br>
+
+<!-- USA QUESTO FILE HTML COME TEMPLATE - INSERISCI  	BODY E SCRIPT 	DEI NUOVI PROGRAMMI DA QUI IN POI  fino a </script></body> -->
+
+<body>
+<div style="margin-left: 10px;">
+
+<h1 style="color:black">Gioco di parole</h1>
+<h2 style="color:black">Trova la parola più lunga utilizzando più lettere possibile</h2>
+<br>
+	<form>
+	<button type="submit" id='b_1' class="bb_1"  >GIOCA</button>		<!-- inserisce bottone nel DOM. L'etichetta è interna al bottone. type="submit" ricarica la pagina -->
+	</form>
+<br><br>
+
+<h2 id="par2" class="bb_0" style="color:blue">Parole casuali</h2>
+
+<script>
+
+// ENDECASILLABO: Gioco di parole - Trova la parola più lunga utilizzando più lettere possibile:
+
+lettere=[]
+
+// il loop genera un numero casuale, da questo in base alla frequenza delle lettere nella lingua italiana sceglie una lettera, poi la impila nell'array
+for(i=0; i<11; i++){		// 11 lettere. Se si vuole modificare il numero di lettere inserire un numero diverso al posto di 11.
+var numero = Math.floor(Math.random() *10000);
+
+if ((0<=numero)&&(numero<=1174)) {lettera='a'};
+if ((1175<=numero)&&(numero<=1266)) {lettera='b'};
+if ((1267<=numero)&&(numero<=1716)) {lettera='c'};
+if ((1717<=numero)&&(numero<=2089)) {lettera='d'};
+if ((2090<=numero)&&(numero<=3268)) {lettera='e'};
+if ((3269<=numero)&&(numero<=3363)) {lettera='f'};
+if ((3364<=numero)&&(numero<=3527)) {lettera='g'};
+if ((3528<=numero)&&(numero<=3681)) {lettera='h'};
+if ((3682<=numero)&&(numero<=4809)) {lettera='i'};
+if ((4810<=numero)&&(numero<=5460)) {lettera='l'};
+if ((5461<=numero)&&(numero<=5711)) {lettera='m'};
+if ((5712<=numero)&&(numero<=6399)) {lettera='n'};
+if ((6400<=numero)&&(numero<=7382)) {lettera='o'};
+if ((7383<=numero)&&(numero<=7687)) {lettera='p'};
+if ((7688<=numero)&&(numero<=7738)) {lettera='q'};
+if ((7739<=numero)&&(numero<=8375)) {lettera='r'};
+if ((8376<=numero)&&(numero<=8873)) {lettera='s'};
+if ((8874<=numero)&&(numero<=9435)) {lettera='t'};
+if ((9436<=numero)&&(numero<=9736)) {lettera='u'};
+if ((9737<=numero)&&(numero<=9946)) {lettera='v'};
+if ((9947<=numero)&&(numero<=10000)) {lettera='z'};
+
+lettere.push(' '+lettera)
+}
+
+// finito il loop, visualizza l'intero array
+document.getElementById('par2').innerHTML=lettere
+
+/*
+*/
+</script>
+<div style="margin-left: 10px;">
+</body>
+</html>
+
+<!--
+-->
+

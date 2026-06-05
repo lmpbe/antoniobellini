@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>JS - MdT</title>
+</head>
+
+<style>
+
+.class1 {
+color: blue;  font-size: 0.9em; font-style: italic;
+}
+
+.class2 {
+color: red;  font-size: 1em; font-style: bold;
+}
+
+.nomeclass {font-size: 2em}
+
+.bb_1 {height: 80px; width: 12%; font-size: 2em; margin: 10px; background-color: yellow}	 	/* class con stile del bottone*/
+.bb_0 {font-family: Courier; letter-spacing: 2px; font-size: 300%}
+
+</style>
+
+<body>
+
+<!--
+======= EVENTI =============== // MANCA EVENTO PREMERE UN TASTO
+<a href="JavaScript:void(0)" onClick="alert('Hi');">Click</a>
+<spam> &emsp; &emsp; </spam>
+<a href="JavaScript:void(0)" onClick="var greet='hi'; alert(greet);">Click2</a>
+<spam> &emsp; &emsp; </spam>
+<a href="JavaScript:void(0)" onClick="popup('Hi');">Click3</a>
+<br><br>
+
+<input type="button" value="Click" onClick="alert('Hello world!');">
+<br><br>
+
+<button type="button" onClick="alert('Hello world!');" >6 caratteri</button>	
+<br><br>
+
+EMAIL:<br>
+<input type="text" size="60" onFocus="this.style.backgroundColor='yellow';"
+onBlur="this.style.backgroundColor='white';">
+<br><br>
+
+<form onSubmit="checkAddress('email');">
+Email:
+<input type="text" id="email">
+<input type="submit" value="Submit">
+</form>
+<br>
+
+<form action="action_page.php" method="get">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br>
+  <input type="submit" value="Submit">
+</form>
+<br>
+
+<form onSubmit="return checkForSelection();">
+<select id="states">
+<option value="" selected="selected">SELECT</option>
+<option value="AL">Alabama</option>
+<option value="AK">Alaska</option>
+<option value="AZ">Arizona</option>
+<option value="AR">Arkansas</option>
+</select>&nbsp;&nbsp;
+<input type="submit" value="Submit Form">
+</form>
+
+======= MODIFICA PAG WEB  =============== 
+
+
+== Schema menu a tendina ==
+-->
+
+<select id="cars" style="color:blue; font-weight:" class='bb_1'>
+<option value="" selected="selected">SELECT</option>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+<select id="cars" class='bb_1'>
+  <option value="volvo">VOLVO</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+<select id="cars" class='bb_1'>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+<select id="cars" class='bb_1'>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+<select id="cars" class='bb_1'>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+<select id="cars" class='bb_1'>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+<select id="cars" class='bb_1'>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+<select id="cars" class='bb_1'>
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select><br><br><br><br>
+
+<button type="button" onClick="alert('Hello world!');" >6 caratteri</button>	
+<button type="button" id='button1' >con ID</button>	
+<br><br>
+
+EMAIL: 
+<input id="MioElemento" type="text" size="60" value="Valore default" onFocus="this.style.backgroundColor='yellow';">
+<br>
+
+<form method="get">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br>
+  <input type="submit" value="Submit">
+</form>
+<br>
+
+<form onSubmit="return checkForLastName();">
+Please enter your last name.<br>
+<input type="text" id="lastNameField">
+<input type="submit" value="Submit Form" id='pippo1'>
+</form>
+
+
+<div id='iddiv_1'>
+<h1 id='idh1_1'  style = 'position:relative; left:50px;'> 1. partita IVA serve solo se percepisce compenso</h1>
+
+
+<h2 id='idh2_1'> 2. come si apre la partita IVA? quali documenti? </h2>
+<h3 id='idh3_1'> 3. come si emettono in pratica le fatture? cartacee? elettroniche? chi fa le fatture elettroniche? </h3> 
+
+<p id='idp_1' class='class1' style ='position:relative; left:50px; width: 90%'>Non è possibile sottoporre la psicanalisi a verifica sperimentale. Lo dice esplicitamente Freud, p. es. nella 1a lezione dell’Introduzione alla psicanalisi, quindi la psicanalisi NON è una scienza.
+Infatti in oltre 100 anni di psicanalisi non è mai stata fatta una verifica sperimentale seria né delle sue teorie né della sua efficacia terapeutica. Il motivo per cui gli psicanalisti hanno sempre rifiutato verifiche sperimentali è chiaro: sapevano che avrebbero mostrato l’inconsistenza delle loro teorie. È la tipica procedura delle pseudo scienze.</p>
+</div>
+
+<p id='idp_2'> Indubbiamente! Freud, come i preti e i marxisti, aveva una giustificazione per tutto. Infatti la psicanalisi non è falsificabile.</p>
+
+<div id='iddiv_2'>
+<h3 id='idh3_2' class='class2' style="text-align:center"> 4. come si fa la dichiarazione dei redditi?</h3>
+<h3 id='idh3_3'>5. quale altra documentazione è necessaria?</h3>
+
+<p  id='idp_3' class='class2 '> Scrivi: "la pulsione sessuale è assente nel bambino piccolo. Si origina nella pubertà a seguito di specifici cambiamenti ormonali". Dovresti mostrare l'evidenza di tale affermazione citando qualche fonte. E comunque intenderesti la sessualità fisica, dato che gli ormoni attingono alla fisiologia. Ma la sessualità psichica no. Oppure intendi dire che esiste solo la sessualità fisica?</p>
+
+<p id='idp_4'> Che la pulsione sessuale si origina nella pubertà è noto a ognuno, sia per averlo provato direttamente, sia per averlo visto nelle altre persone. Che ciò avviene a seguito di specifici cambiamenti ormonali lo spiega la biologia. La sessualità psichica senza pulsione sessuale non esiste, così come non esiste la vista per un cieco. Queste sono cose evidenti a chiunque.
+È Freud che deve portare delle prove per la sua teoria della sessualità dei bambini piccoli, in netto contrasto con l’esperienza comune. Ma Freud non lo fa: dice soltanto che è così, perché lo ha dedotto dalle sedute psicanalitiche (senza ovviamente spiegare come lo avrebbe dedotto). È la tipica procedura delle pseudo scienze.<p/>
+</div>
+
+<p><a id="myAnchor" href="http://www.microsoft.com">www.microsoft.com</a></p>
+
+<p><img id="myImg" src="compman.gif" width="107" height="98"></p>
+
+<p><a href="JavaScript:void(0)" onClick="popup('Ciao bello!')">Click</a><p>
+
+<input type="button" value="Click" onClick="popup('Ciao bello!')">
+<button type="button" onClick="popup('Ciao bello!')" >6 caratteri</button>
+
+<form>
+Email:
+<input type="text" size="60" onFocus="this.style.backgroundColor='yellow';" onBlur="this.style.backgroundColor='white';">
+</form>
+
+<form onSubmit="scrivi(document.getElementById('testo1').value, document.getElementById('testo2').value)">
+Scrivi testo:
+<input type="text" id="testo1">
+<input type="text" id="testo2">
+<input type="submit" value="Submit">
+</form>
+
+<input type="text" onkeypress="popup('Ho premuto un tasto!')">
+
+
+<p id="demo">The Unicode value is: </p>
+<br><br><br><br>
+
+<html onkeypress=cheTasto()>
+
+
+
+
+
+
+
+
+
+
+<script src="jquery-2.1.0.js"></script>
+<script>
+
+
+function checkForLastName() {
+if (document.getElementById("lastNameField").value.length === 0) {
+alert("Please enter your last name");
+return false;
+}
+}
+
+
+
+cheTasto = function(){
+if(event.which===119){alert('Hai premuto W')}
+if(event.which===113){alert('Hai premuto Q')}
+}
+
+popup =function(message) {alert(message)}
+
+function checkAddress(fieldId) {
+if (document.getElementById(fieldId).value === "") {
+alert("Email address required.");
+}
+}
+
+scrivi = function(arg1, arg2) {alert("Dico "+arg1+" e poi anche "+arg2)}
+
+
+
+
+function myFunction() {
+unicode= event.which; alert(event.which);
+document.getElementById("demo").innerHTML = 'The Unicode value is: '+unicode;
+}
+
+
+
+function greetWorld() {alert('greeting')}
+document.getElementById("button1").onclick = greetWorld
+
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+<!--
+
+======= EVENTI =============== 
+ONCLICK:
+	LINK:
+// In <body>
+<p><a href="JavaScript:void(0)" onClick="popup('Ciao bello!')">Click</a><p>		= <a> sta per anchor, cioè link generico. href="JavaScript:void(0)" è il link vuoto. Click lancia la funzione.
+// In <script>
+popup =function(message) {alert(message)}	= definisce la funzione lanciata
+	BOTTONE:
+// In <body>
+<input type="button" value="Click" onClick="popup('Ciao bello!')">		= Click lancia la funzione
+<button type="button" onClick="popup('Ciao bello!')" >6 caratteri</button>			= Click lancia la funzione
+// In <script>
+popup =function(message) {alert(message)}	= definisce la funzione lanciata
+
+ONMOUSEOVER, ONMOUSEOUT (mouse entra ed esce dall'elemento):
+// In <body>
+<h3 onMouseover="popup('Ciao bello!')">World Ends Tomorrow</h3>		= quando mouse entra lancia la funzione
+<h4 onMouseover="popup('Ciao bello!')" onMouseout="popup('Ciao brutto!')">World Ends Tomorrow</h4> = quando mouse entra ed esce lancia le rispettive funzioni
+popup =function(message) {alert(message)}	= definisce la funzione lanciata
+
+ONFOCUS, ONBLUR (mouse clicka dentro e fuori un campo di una FORM):
+// In <body>
+<form>
+Email:
+<input type="text" size="60" onFocus="this.style.backgroundColor='yellow';" onBlur="this.style.backgroundColor='white';">	=qui cambia colore, ma può anche lanciare una funzione
+</form>
+
+ONSUBMIT (in una FORM, Click lancia la funzione, utlilizzando gli imput utente immessi nei campi, richiamabili con "document.getElementById(IdCampo).value"
+// In <body>
+<form onSubmit="scrivi(document.getElementById('testo1').value, document.getElementById('testo2').value)">	// Click lancia la funzione con 2 argomenti dai 2 campi della FORM
+Scrivi testo:
+<input type="text" id="testo1">
+<input type="text" id="testo2">
+<input type="submit" value="Submit">
+</form>
+// In <script>
+scrivi = function(arg1, arg2) {alert("Dico "+arg1+" e poi anche "+arg2)}	// definisce la funzione con 2 argomenti dai 2 campi della FORM
+
+PREMERE UN TASTO SPECIFICO
+// In <body>
+<html onkeypress='alert(event.which)'>	//OGNI tasto premuto, mostra il valore unicode del tasto
+	// Oppure, in forma più articolata: in <body>
+	<html onkeypress='cheTasto()'>		// OGNI tasto premuto, lancia la funzione
+	// In <script>
+	cheTasto = function(){
+	if(event.which===119){alert('Hai premuto W')};	// se il tasto premuto [event.which] corrisponde al valore unicode voluto, mostra il tasto premuto
+	if(event.which===113){alert('Hai premuto Q')}
+	}
+
+
+======= MODIFICA PAG WEB  =============== 
+document.write('<tag>testo<tag> <tag>testo<tag>')	= scrive testo formattato, cancellando la pagina attuale [si usa per scrivere su una PAGINA VUOTA]
+--- GETELEMENTBYID('id'):
+document.getElementById('nomeId') 		= restituisce tutto l'elemento HTML (<tag>...</tag>) con quell' ID
+document.getElementById('nomeId').innerHTML 		= restituisce (o cambia) la sola stringa, senza  <tag>, formattabile, con quell' ID
+	ESEMPIO di scrittura di un testo formattato:
+	document.getElementById('nomeId').innerHTML='<span style="color:blue; font-weight:bold"> testo </spam>'
+document.getElementById('nomeId').innerText 		= restituisce (o cambia) la sola stringa, senza  <tag>, in plain text, con quell' ID
+document.getElementById("idp_1").textContent += " This is the text from javascript."		= aggiunge testo a un elemento
+document.getElementById("idp_1").innerHTML += " This is the text from javascript."		= aggiunge testo a un elemento
+	FORM:
+document.getElementById('nomeId').value		=restituisce (o cambia) il valore della casella di testo (impostato di default o inserito dall'utente) di un form con quell' ID
+document.getElementById("lastNameField").value.length		= restituisce il numero di caratteri della stringa immessa
+	NON SUBMETTE IL FORM (non ricarica la pagina e mantiene la stringa errata) SE IL TEST FALLISCE
+In <body>		// FORM di immissione
+<form onSubmit="return checkForLastName();">		// il comando chiave è RETURN + funzione: se il ritorno e false non submette, se è true, o altro,  submette.
+Please enter your last name.<br>
+<input type="text" id="lastNameField">
+<input type="submit" value="Submit Form" id='pippo1'>
+</form>
+In <script>
+function checkForLastName() {		// CHECK di immissione corretta
+if (document.getElementById("lastNameField").value.length === 0) {
+alert("Please enter your last name");
+return false;}}				// il comando chiave è RETURN false, quindi non submette
+	LINK:
+in <body> il link (anchor) da modificare:
+<p><a id="myAnchor" href="http://www.microsoft.com">www.microsoft.com</a></p>
+in <script> il link (anchor) che modifica l'originale:
+document.getElementById("myAnchor").href = "http://www.cnn.com/"
+	IMMAGINE:
+in <body> immagine da modificare:
+<img id="myImg" src="compman.gif" width="107" height="98">
+in <script> immagine che modifica l'originale:
+ document.getElementById("myImg").src = "hackanm.gif";
+	STILI:
+document.getElementById("nomeId").className += " nomeclass"		= agiunge gli stili definiti in CSS in nomeclass all'ID  [lo spazio in " nomeclass" separa i nomi delle 2 class]
+document.getElementById("nomeId").style.background = "yellow";		= agiunge quel particolare stile all'ID
+--- RIMUOVE ELEMENTO DALLA PAGINA
+document.getElementById("nomeId").innerHTML=''		// ponendo l'elemento vuoto, lo rimuove
+--- INSERISCE ELEMENTO NELLA PAGINA (paragrafo <p>, titolo <h1>, divisione <div>, ecc.) dopo l'elemento con un dato ID
+node = document.createElement("p");	// crea un elemento paragrafo <p>
+textnode = document.createTextNode("Testo del nuovo elemento");		// inserisce testo
+node.setAttribute("class", "nomeclass");	// assegna attributo al nuovo elemento
+node.setAttribute("id", "nomeIdNuovo");		// assegna altro attributo al nuovo elemento
+node.appendChild(textnode);		// assegna testo all'elemento
+document.getElementById("nomeId").appendChild(node);	// inserisce l'elemento creato dopo l'elemento con ID 'nomeId'
+		Anche con APPEND():
+		node = document.createElement("p");
+		document.getElementById('iddiv_1').append('Testo del nuovo elemento', node)
+--- FADE OUT, IN
+setTimeout(function(){document.getElementById('nomeID').style.opacity = 0}, millisecondi);	// Scompare/compare elemento con quell' ID in tot millisecondi (da 0=trasparente a 1= opaco)
+--- EVENTI - LANCIA FUNZIONE
+document.getElementById("nomeId").onclick = nomefunzione senza parentesi
+document.getElementById("nomeId").onfocus = nomefunzione senza parentesi
+document.getElementById("nomeId").onsubmit = nomefunzione senza parentesi
+--- GETELEMENTSBYTAGNAME('tag')
+nomearray = document.getElementsByTagName("p")			= crea un array di tutti i TAG <p> e lo mette in nomearray
+	nomearray[i]	= restituisce l' iesimo TAG <p>
+--- Rifermento a DIV sezione del DOCUMENT:
+e=document.getElementById('divId')		= assegna alla variabile e il DIV con quell'ID
+nomearray = e.getElementsByTagName("p")		= si riferisce solo ai tag del DIV con quell'ID
+nomearray[i]	= restituisce l' iesimo TAG <p> interno a quel DIV
+
+======= HTML ATTRIBUTI ======= 
+Whenever you see this form... <element something="something in quotes"> ...you're looking at an element with an ATTRIBUTE. The word on the left side of the equal sign is the attribute NAME. The word on the right side of the equal sign is the attribute VALUE. An element can have any number of attributes, separati da uno spazio (senza virgola): <img src="dan.gif" alt="Dan" height="42" width="42">
+- document.getElementById('nomeId').hasAttribute("attributo")	// ritorna true se il tag con quell'ID ha quell'attributo, altrimenti ritorna false
+- document.getElementById('nomeId').getAttribute("attributo")	// ritorna l'attriburo del tag con quell'ID, se il tag non ha quell'attributo ritorna null
+- document.getElementById('nomeId').setAttribute('attributo', 'nomeattributo')	// mette l'attriburo 'nomeattributo' al tag con quell'ID
+- nomearray = document.getElementById("nomeId").attributes				= crea un array di tutti gli attributi del tag con quell'ID e lo mette in nomearray
+
+======= CONTROLLI PAGINA WEB ======= 
+window.location.href;		= ritorna URL della pagina WEB
+	window.location.href = "https://it.wikipedia.org/wiki/Dante_Alighieri";		=apre la pagina WEB indicata
+	window.location.href = "https://it.wikipedia.org/wiki/Dante_Alighieri#Il_Ghibellin_fuggiasco";
+window.location.assign("https://it.wikipedia.org/wiki/Dante_Alighieri");				=apre la pagina WEB indicata
+window.open("https://it.wikipedia.org/wiki/Dante_Alighieri");				=apre la pagina WEB indicata
+window.open("https://it.wikipedia.org/wiki/Dante_Alighieri", "", "width=420,height=380");				=apre la pagina WEB indicata in un'altra finesta con certe dimensioni
+window.open("", "", "width=100,height=100");		=test popup: se c'è il blocco popup ritorna null [testare nel caricamento pagina: <body onLoad ="checkForPopBlocker();">]
+window.open("", "","width=100,height=100");
+window.open();		= apre una nuova pagina WEB
+window.close();		= chiude la pagina WEB
+window.location.hostname;		= get just the domain name
+window.location.pathname;	= ritorna il link, senza dominio
+window.location.hash;	= ritorna la sezione della pagina in cui siamo
+window.location.reload();		= ricarica la pagina dalla cache
+window.location.reload(true);		= ricarica la pagina dal server
+history.back();		= va alla pagina aperta precedentemente
+history.forward();	= va alla pagina aperta successivamente
+document.referrer;	= ritorna il link clickando il quale è stata aperta la pagina attuale
+
+
+
+========================== NOTE:
+INPUT TYPE
+The <input type="button"> is just a button and won't do anything by itself. The <input type="submit">, when inside a form element, will submit the form when clicked [the submission is an event that
+applies to the whole form, not the submit button (Altrimenti per eseguire il comando si potrebbe mettere ONCLICK sul bottone)].
+Another useful 'special' button is the <input type="reset"> that will clear the form.
+
+
+
+
+
+
+
+-->

@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+
+<html lang="it"><head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type"><title>Sito di Antonio Bellini</title>
+  <meta content="lmpbe@tin.it" name="author">
+  <meta content="Sito di Antonio Bellini" name="description">
+</head>
+
+ <style type="text/css">
+/* */
+nav {
+background: yellow none repeat scroll 0% 50%;
+line-height: 2.5em; font-size: 180%}
+a:hover {
+  background-color: #ffcc33;
+}
+
+.bb_1 {  position: relative; height: 100px; width: 20%; font-size: 2em; margin: 10px; background-color:}	 	/* class con stile del bottone*/
+
+.bb_2 {  position: absolute; height: 100px; width: 20%; font-size: 2em; margin: 10px; 
+background-image: repeating-linear-gradient(45deg, pink, pink 60px, orange 60px, orange 120px, yellow 120px, yellow 180px);
+}	 	/* class con stile del bottone*/
+
+table {
+border-spacing: 3px;
+font-size: 100px;
+font-family: Courier;
+text-align:center;
+color: white;
+}
+
+td {
+width: 180px;
+height: 180px;
+border: 1px solid black;
+}
+</style>
+
+<nav><a style="font-weight: bold; background-color: yellow;" href="memo_quadri_bis.html">HOME</a><span style="background-color: yellow;">&nbsp;&nbsp;&nbsp;&nbsp; 
+</span><br>
+</nav>
+<hr style="width: 100%; height: 2px;"><br>
+
+<body id="schermo">
+<!--
+-->
+
+<h1 style="color:black">Gioco di memoria - Ricorda le coppie uguali.</h1><br>
+
+<table id="tabella">
+<tr>
+<td id="0" onClick="vediCella()"></td>
+<td id="1" onClick="vediCella()"></td>
+<td id="2" onClick="vediCella()"></td>
+<td id="3" onClick="vediCella()"></td>
+<td id="4" onClick="vediCella()"></td>
+</tr>
+<tr>
+<td id="5" onClick="vediCella()"></td>
+<td id="6" onClick="vediCella()"></td>
+<td id="7" onClick="vediCella()"></td>
+<td id="8" onClick="vediCella()"></td>
+<td id="9" onClick="vediCella()"></td>
+</tr>
+<tr>
+<td id="10" onClick="vediCella()"></td>
+<td id="11" onClick="vediCella()"></td>
+<td id="12" onClick="vediCella()"></td>
+<td id="13" onClick="vediCella()"></td>
+<td id="14" onClick="vediCella()"></td>
+</tr>
+<tr>
+<td id="15" onClick="vediCella()"></td>
+<td id="16" onClick="vediCella()"></td>
+<td id="17" onClick="vediCella()"></td>
+<td id="18" onClick="vediCella()"></td>
+<td id="19" onClick="vediCella()"></td>
+</tr>
+<tr>
+<td id="20" onClick="vediCella()"></td>
+<td id="21" onClick="vediCella()"></td>
+<td id="22" onClick="vediCella()"></td>
+<td id="23" onClick="vediCella()"></td>
+<td id="24" style="background: repeating-linear-gradient(  45deg, black, black 20px, white 20px, white 40px)"></td>
+</tr>
+</table>
+<br><br><br><br><br>
+
+<form>
+<button type="button" id='b_1' class="bb_1" onClick="giocaSimboli()">Gioco simboli</button>		<!-- inserisce bottone nel DOM. L'etichetta è interna al bottone -->
+<button type="button" id='b_2' class="bb_2" onClick="giocaColori()">Gioco colori</button>		<!-- inserisce bottone nel DOM. L'etichetta è interna al bottone -->
+</form>
+
+		<script>
+/*
+*/
+
+// variabili per testo-grafico e testo per le varie celle
+lav0=''		// definisce variabile che carica i simboli da scrivere nei vari canvas
+lav1=''		// definisce variabile che carica i quadri (canvas) sui quali scrivere il 2° simbolo, uguale al primo, per formare una coppia casuale, in canvas, casuali
+lav2=200	// variabile di lavoro: assume numero del 1 quadro (canvas) clickato per poi confrontarlo col 2 quadro clickato. è 200 per non indicare al 1 click un quadro già esistente
+lav3=1		// variabile di lavoro: indica se è il 1° o 2° quadro clickato. è 1 = primo quadro clickato
+n=0	// contatore click
+coppie=[]	// array che ricorda i canvas già trovati uguali, per rendere nullo il click per errore si di essi
+simboliScritti=[]	// array che ricorda i simboli già scritti nei canvas per evitare duplicati
+colori=['grey', 'lightgray', 'red', 'orange', 'yellow', 'green', 'greenyellow', 'blue', 'cyan', 'purple', 'violet', 'pink']		// 12 colori
+
+for(i=0; i<24; i++) {		// per ognuno delle 24 celle...
+window['v'+i]='.';	// assegna da v0 a v23 ='.'
+document.getElementById(i).innerHTML=window['v'+i];}	// scrivi nelle 24 celle da v0 a v23 ='.'
+
+if(localStorage.getItem("tipo")==='simbol'){
+a_simboli=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9']	// 62 simboli
+};
+
+if(localStorage.getItem("tipo")==='color'){
+a_simboli=['0','1','2','3','4','5','6','7','8','9','10','11']	// 12 simboli per 12 colori
+};
+
+
+// funzioni per nuovo gioco, con simboli o colori, lanciate dai pulsanti
+giocaSimboli= function(){
+localStorage.setItem("tipo", "simbol");		//localStorage mantiene 'simbol' o 'color', che impostano il tipo di gioco, nonostante il reload da clik pulsante.
+window.location.reload();
+}
+giocaColori= function(){
+localStorage.setItem("tipo", "color");
+window.location.reload();
+}
+
+// clikando sopra le celle ne mostra il contenuto e lancia la funzione per girarle di nuovo (=celle bianche)
+vediCella=function(){
+if(localStorage.getItem("tipo")==='simbol'){		// gioco con simboli
+document.getElementById(event.target.id).innerHTML=window['v'+event.target.id]; 		// per ogni cella clickata event.target.id restituisce l' ID di quella cella
+document.getElementById(event.target.id).style.color = "black";		// ogni simbolo è visualizzato con colore nero
+};
+if(localStorage.getItem("tipo")==='color'){		// gioco con colori
+document.getElementById(event.target.id).style.color = colori[window['v'+event.target.id]];		// ogni simbolo è visualizzato con il colore ad esso associato
+document.getElementById(event.target.id).style.background = colori[window['v'+event.target.id]];		// ogni sfondo realtivo al simbolo è visualizzato con il colore ad esso associato
+};
+gira(event.target.id)};		// chiama gira() per le procedure successive
+
+
+// se 2 celle solo uguali le lascia visibili, se sono diversi li rinasconde, e aumenta il contatore
+gira = function(ar_1){
+if(coppie.indexOf(ar_1)!==-1){			// se clicka erroneamente su canvas già trovati uguali: flash schermo e interrompe la funzione
+setTimeout(function(){document.getElementById('schermo').style.opacity = 0}, 1);		// fa svanire lo schermo dopo 1 millisec
+setTimeout(function(){document.getElementById('schermo').style.opacity = 1}, 20);		// fa svanire lo schermo dopo 20 millisec
+return}
+if(coppie.indexOf(ar_1)===-1){n++;		// se clicka su canvas vuoti aumenta il contatore e continua la funzione
+document.getElementsByTagName("h1")[0].innerHTML='Ricorda le coppie uguali. '+String.fromCharCode(160,160,160,160,160,160,160,160,160,160,160,160)+'Click: '+n; // aggiorna titolo
+if (window['v'+lav2]===window['v'+ar_1]){	// se il riquadro clickato precedentemente e quello attuale sono uguali...
+coppie.push(lav2); coppie.push(ar_1); 	// mette in un array i canvas trovati uguali
+lav2=200; lav3=1; return}		// rimetti le variabili di lavoro al valore iniziale ed esci (lasciando visibili i 2 quadri uguali)
+if(window['v'+lav2] !== window['v'+ar_1]){ 	// se il riquadro clickato precedentemente e quello attuale sono diversi...
+if (lav3===1) {lav3=2; lav2=ar_1; return}	// e la variabile di lavoro lav3 è al valore iniziale (=1° quadro clickato), setta lav3 (=2° quadro clickato) e lav2 sul numero del quadro
+else if (lav3!==1) {		// e lav3 è al 2° quadro clickato...
+setTimeout(function(){
+document.getElementById(ar_1).style.color = "white";		// rinascondi il quadro attualmente clickato...
+document.getElementById(ar_1).style.background = "white";
+document.getElementById(lav2).style.color = "white";		// rinascondi il quadro precedentemente clickato, e resetta variabili di lavoro
+document.getElementById(lav2).style.background = "white";
+lav2=200; lav3=1; return				// rimetti le variabili di lavoro al valore iniziale ed esci (nascondendo i 2 quadri diversi)
+}, 2000);
+} // IF2
+} // IF1
+} //Fu
+} // IF0
+
+
+// a inizio gioco assegna alle 24 celle un proprio simbolo
+for(i=0; i<24; i++) {		// per ognuno delle 24 celle...
+if (document.getElementById(i).innerHTML==='.'){lav0 = a_simboli[Math.floor(Math.random()*a_simboli.length)];		// se il canvas è vuoto...
+if(simboliScritti.indexOf(lav0)===-1){		// se il simbolo NON è già scritto in un canvas (IF1)
+window['v'+i] = lav0;		// assegna simbolo alla sua variabile... (se non è vuoto ripeti FOR0)
+document.getElementById(i).innerHTML=lav0;		// scrivila come testo nel canvas per i confronti
+simboliScritti.push(lav0); 	// metti in un array i simboli scritti nei canvas
+for (j=0; j<1000; j++){lav1=Math.floor(Math.random()*24);	// poi, assegna a lav1 un numero da 1 a 24
+if (document.getElementById(lav1).innerHTML==='.'){window['v'+lav1]=lav0;		// se canvas di lav1 è vuoto assegna lo stesso simbolo alla sua variabile... (se non è vuoto ripeti FOR1 1000 x volte)
+document.getElementById(lav1).innerHTML=lav0;			// scrivila come testo nel canvas per i confronti
+break}	// dopo aver assegnato simbolo alla variabile e averlo scritto come testo nel canvas, esci da FOR1
+};  //FOR 1
+}; // IF1
+if(simboliScritti.indexOf(lav0)!==-1){i--}	// se il simbolo è già scritto in un canvas diminuisci il contatore e ripeti
+}; // IF 0
+} //FOR 0
+
+		</script>
+	</body>
+</html>
+
+<!--
+-->

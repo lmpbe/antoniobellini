@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="it"><head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type"><title>Sito di Antonio Bellini</title>
+  <meta content="lmpbe@tin.it" name="author">
+  <meta content="Sito di Antonio Bellini" name="description">
+</head>
+
+ <style type="text/css">
+nav {
+background: yellow none repeat scroll 0% 50%;
+line-height: 2.5em;}
+a:hover {
+  background-color: #ffcc33;
+}
+
+.button1 {height: 100px; width: 20%; font-size: 2em;}
+ </style>
+
+<body>
+<nav><a style="font-weight: bold; background-color: yellow;" href="../index.html">HOME</a><span style="background-color: yellow;">&nbsp;&nbsp;&nbsp;&nbsp; 
+</span><br>
+</nav>
+<hr style="width: 100%; height: 2px;"><br>
+<h1>Bulls and Cows</h1>
+
+	<p><big><span style="font-weight: bold;">
+REGOLE</span></big><br>
+Bulls and cows is a lot like the commercial game MastermindTM, but using four-digit numbers instead of coloured pegs. <br>
+Each guess is marked according to how many bulls (that is correct
+digits in correct locations) and how many cows (that is correct digits
+but in the wrong position) are present in the guess, but not counting
+the digits already counted in previous bulls and cows. <strong>E.g. <span style="background-color: rgb(255, 255, 153);">N=xy--, G=x-y-: 1b1c. N=xx--, G=x---: 1b. N=xx--, G=--x-: 1c. N=-x--, G=xx--: 1b. N=-x--, G=--xx: 1c. N=xx--, G=x-xx: 1b1c.</span> </strong><br>
+The number of bulls and cows for each guess is displayed to the right of the guess.<br>
+<br><br><big><span style="font-weight: bold;">
+STRATEGIA - SINTESI</span></big><br>
+<br><span style="font-weight: bold;">
+1. GIOCO CON RIPETIZIONI:</span><br>
+1°: 2 coppie (AABB)<br>
+2°: 1 coppia<br>
+- se 1° ha almeno 1 bull, ripeti una delle 2 coppie precedenti nella stessa posizione (AACD)<br>
+- se 1° non ha bull ma almeno un cow, ripeti una delle 2 coppie precedenti  in diversa posizione (BBCD)<br>
+- se 1° non ha bull né cow, indica una coppia diversa dalle 2 precedenti (CCDE)<br>
+3°: strategia naturale: coerenza, informazione, intuito<br>
+<br><span style="font-weight: bold;">
+2. GIOCO SENZA RIPETIZIONI:</span><br>
+1°: casuale (ABCD)<br>
+2°: <br>
+- se 1°: 10, 11, 01, 02: ripeti 1 cifra, nello stesso posto se 1° ha un bull (AEFG), altrimenti in un posto diverso (EAFG)<br>
+- altrimenti: strategia naturale: coerenza, informazione, intuito<br>
+3°:<br>
+- se 1°-2°: 01-01, 01-02, 02-01: ripeti 1 cifra del 1° e 1 cifra del
+2°, la stessa del 1° ripetuta nel 2° se 02-01 cow (FHAI), un'altra
+negli altri casi (FHBI)<br>
+- altrimenti: strategia naturale: coerenza, informazione, intuito.<br>
+</p>
+<br><br>
+<form>
+<button  type="submit" class="button1">GIOCA</button>
+</form>
+<br><br><br><br>
+<script src="jquery-2.1.0.js"></script>
+
+	<script>
+
+// 					GIOCO BULL COW
+// VARIABILI
+var quanteCifre		// numero di cifre della cifra segreta
+input=[]		// array input utente, varia ad ogni turno
+input1=[]
+var inputStringa	// stringa input utente, poi convertita in array: varia ad ogni turno
+a_segr=[]		// array cifra segreta con e senza ripetizioni
+a_segr0=[]
+a_segr1=[]
+var cifra		// variabile per singola cifra, nella formazione della cifra segreta con e senza ripetizioni
+bull=0		// definisce le variabili bull e cow e inizialmente le pone a zero
+cow=0
+bull2=0
+cow2=0
+possibili=[]	// array delle n-ple che soddisfano gli input che l'utente immette via via. Inizialmente sono 10.000 con ripetizioni, 5.040 senza ripetizioni
+possibili0=[]
+possibili2=[]
+turni=[]		// array che archivia input utente e bull-cow di ogni turno, inizialmente posto nullo
+
+
+// PROGRAMMA INIZIALE FUORI DAL CICLO (ogni ciclo Ã¨ un turno: input, conteggio bull e cow, confronto n-ple compatibili, scrivi risultati, ripeti ciclo)
+
+// SCEGLI GIOCO CON O SENZA RIPETIZIONE DELLE CIFRE
+for(i=0; i<2; i++){
+tipoGioco= prompt('Scegli  la lunghezza del numero segreto, con o senza ripetizione delle cifre:\n1 = numero di 4 cifre senza ripetizione\n2 = numero di 4 cifre con ripetizione\n3 = numero di 5 cifre con ripetizione')
+if((tipoGioco ==1)||(tipoGioco ==2)||(tipoGioco ==3)||(tipoGioco ===null)){break}	// se la scelta Ã¨ una di quelle proposte, o null, esce dal LOOP..
+i--		// ... altrimenti abbassa il contatore e ripete il  LOOP di richieste
+}//For
+
+
+if (tipoGioco ==1){		// gioco 4 cifre SENZA ripetizioni
+quanteCifre=4
+// SCRIVE 4 CIFRE (segrete), SENZA RIPETIZIONI
+for(i=0; i<quanteCifre; i++ ){			// scrive array a_segr di 4 cifre SENZA RIPETIZIONI
+cifra=Math.floor(Math.random()*10);
+if (a_segr.indexOf(cifra) !==-1) {i--};		// se la cifra casuale Ã¨ giÃ  presente nell'array diminuisce il contatore per ripetere un loop
+if (a_segr.indexOf(cifra) ===-1) {a_segr.push(cifra)};
+};
+// ARRAY STRINGHE DA 0000 A 9999 	SENZA ripetizione delle cifre
+for(p=0; p<10; p++){		// 4 cifre da 0 a 9 combinate...
+for(q=0; q<10; q++){
+for(r=0; r<10; r++){
+for(s=0; s<10; s++){
+if((s!==r)&&(s!==q)&&(s!==p)&&(r!==q)&&(r!==p)&&(q!==p)){
+possibili.push([p,q,r,s])}	// messe in 5040=10*9*8*7 subarray di combinazioni in cui conta l'ordine delle cifre (=1234 Ã¨ diverso da 4321)
+}}}}
+// console.log(possibili)
+} // IF
+
+if (tipoGioco ==2){		// gioco 4 cifre CON ripetizioni
+quanteCifre=4
+// SCRIVE 4 CIFRE (segrete), CON RIPETIZIONI
+for(j=0; j<quanteCifre; j++ ){		// scrive array a_segr di 4 cifre CON RIPETIZIONI
+cifra=Math.floor(Math.random()*10);
+a_segr.push(cifra)}
+// ARRAY STRINGHE DA 0000 A 9999 	CON ripetizione delle cifre
+for(p=0; p<10; p++){		// 4 cifre da 0 a 9 combinate...
+for(q=0; q<10; q++){
+for(r=0; r<10; r++){
+for(s=0; s<10; s++){
+possibili.push([p,q,r,s])	// messe in subarray (10^4 subarray, da 0000 a 9999)
+}}}}
+// console.log(possibili)
+} // IF
+
+if (tipoGioco ==3){		// gioco 5 cifre CON ripetizioni
+quanteCifre=5
+// SCRIVE 4 CIFRE (segrete), CON RIPETIZIONI
+for(j=0; j<quanteCifre; j++ ){		// scrive array a_segr di 5 cifre CON RIPETIZIONI
+cifra=Math.floor(Math.random()*10);
+a_segr.push(cifra)}
+// ARRAY STRINGHE DA 0000 A 99999 	CON ripetizione delle cifre
+for(p=0; p<10; p++){		// 5 cifre da 0 a 9 combinate...
+for(q=0; q<10; q++){
+for(r=0; r<10; r++){
+for(s=0; s<10; s++){
+for(u=0; u<10; u++){
+possibili.push([p,q,r,s,u])	// messe in subarray (10^5 subarray, da 0000 a 99999)
+}}}}}
+// console.log(possibili)
+} // IF
+console.log('cifra segreta: '+a_segr)			// mostra in console la cifra segreta
+
+
+// PROGRAMMA SUCCESSIVO DENTRO IL CICLO (ogni ciclo Ã¨ un turno: input, conteggio bull e cow, confronto n-ple compatibili, scrivi risultati, ripeti ciclo)
+
+// INPUT N-PLE
+inserisci= function(){		 		// assegna l'input utente alla variabile inputStringa
+for(i=0; i<2; i++){
+inputStringa= prompt('Inserisci un numero di '+quanteCifre+' cifre (possibili: '+possibili.length+'):\n'+		// possibili: n-ple che soddisfano gli input che l'utente immette via via
+turni[0]+' = '+turni[1]+'\n'+		// input utente e bull-cow di ogni turno
+turni[2]+' = '+turni[3]+'\n'+
+turni[4]+' = '+turni[5]+'\n'+
+turni[6]+' = '+turni[7]+'\n'+
+turni[8]+' = '+turni[9]+'\n'+
+turni[10]+' = '+turni[11]+'\n'+
+turni[12]+' = '+turni[13]+'\n'+
+turni[14]+' = '+turni[15]+'\n'+
+turni[16]+' = '+turni[17]+'\n'+
+turni[18]+' = '+turni[19]+'\n'+
+turni[20]+' = '+turni[21]+'\n'+
+turni[22]+' = '+turni[23]);
+if((inputStringa.length === quanteCifre)&&(Number(inputStringa)-Number(inputStringa)===0)||(inputStringa ===null)){break}	// se il numero ha le giuste cifre numeriche, o null, esce dal LOOP..
+i--		// ... altrimenti abbassa il contatore e ripete il  LOOP di richieste
+}//For
+input=inputStringa.split('')		// converte la stringa di cifre immessa dall'utente in array
+} //F
+
+
+// CONFRONTA INPUT CON CIFRA SEGRETA E DAI TORI E VACCHE (va bene per array con e senza ripetizioni)
+conta= function(){
+bull=0		// riporta bull e cow a zero
+cow=0
+input0=input.slice();		// duplica array perchÃ© l'originale non sia modificato durante il conteggio di bull e cow
+a_segr0=a_segr.slice()
+for(k=0; k<quanteCifre; k++ ){		// conta BULL
+if(input0[k]==a_segr0[k]){input0[k]='B'; a_segr0[k]= -Math.abs(a_segr0[k]); bull++}		//se trova bull cambia numero degli array duplicati e incrementa bull
+}
+for(a=0; a<quanteCifre; a++ ){		// conta COW
+for(b=0; b<quanteCifre; b++ ){
+if(input0[a]==a_segr0[b]){input0[a]='C'; a_segr0[b]= -Math.abs(a_segr0[b]); cow++}	//se trova cow cambia numero degli array duplicati e incrementa cow
+}}
+console.log(input+' - bull: '+bull+' '+'cow: '+cow)			// mostra in console l'input utente e i relativi bull e cow per ogni turno
+} //F
+
+
+// CONFRONTA TUTTE LE N-PLE CON LA CIFRA SEGRETA: chi ha stessi bull e cow dell'input, push in un nuovo array, da riconfrontare al ciclo successivo
+confronta= function(){
+possibili2=[]		// azzera array di lavoro
+input1=[]
+for(t=0; t<possibili.length; t++){ 
+input1=input.slice();		// duplica array perchÃ© l'originale non sia modificato durante il conteggio di bull e cow
+bull2=0;		// bull e cow di lavoro
+cow2=0; 
+for(f=0; f<quanteCifre; f++ ){		// conta BULL2
+if(possibili[t][f]==input1[f]){input1[f]= 'b'; possibili[t][f]= -Math.abs(possibili[t][f]); bull2++}	//se Ã¨ bull, cambia cifra o segno dalle stringhe e incrementa bull
+}
+for(g=0; g<quanteCifre; g++ ){		// conta COW2
+for(h=0; h<quanteCifre; h++ ){
+if(possibili[t][g]==input1[h]){input1[h]= 'c'; possibili[t][g]= -Math.abs(possibili[t][g]); cow2++}	//se Ã¨ cow, cambia cifra o segno  dalle stringhe e incrementa cow
+}}
+// push in array le stringhe con stessi bull e cow dell'input, con valore assoluto delle cifre, per ripristinare quelle cambiate a segno negativo per conteggio bull e cow
+// i subarray hanno 5 elementi, ma se le cifre del numero segreto sono 4, l'ultimo elemento Ã¨ duplicato e non influenza i conteggi
+if((bull===bull2)&&(cow===cow2)){possibili2.push([Math.abs(possibili[t][0]), Math.abs(possibili[t][1]), Math.abs(possibili[t][2]), Math.abs(possibili[t][3]), Math.abs(possibili[t][quanteCifre-1])])}
+}; //FOR 0
+possibili=[]		// azzera array che conterrÃ  le nuove n-ple compatibili
+possibili=possibili2.slice();			// duplica array con le nuove n-ple compatibili
+console.log(possibili)			// mostra in console le n-ple compatibili con gli input utente per ogni turno
+} // F
+
+
+// LANCIA CICLO (=TURNO)
+for (i=0; i<13; i++){		// sono disponibili al massimo 12 turni (i<13) per indovinare la cifra segreta
+inserisci();
+conta();
+confronta();
+turni.push(input);
+turni.push(bull+' '+cow)
+} // For
+
+
+// $('#b_1').click(function() {location.reload()})
+
+</script>
+
+</body></html>

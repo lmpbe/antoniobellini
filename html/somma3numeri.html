@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="it"><head>
+  <meta content="text/html;charset=ISO-8859-1" http-equiv="Content-Type"><title>Sito di Antonio Bellini</title>
+  <meta content="lmpbe@tin.it" name="author">
+  <meta content="Sito di Antonio Bellini" name="description">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+ <style type="text/css">
+
+nav {
+background: yellow;
+line-height: 2.5em;
+font-family: sans-serif;
+font-size: 16px;}
+
+a:hover {
+  background-color: #ffcc33;
+}
+
+/* USA QUESTO FILE HTML COME TEMPLATE - INSERISCI 	STILI 	DEI NUOVI PROGRAMMI DA QUI IN POI  fino a </style_>	   */
+
+.bb_1 {height: 100px; width: 27%; font-size: 1.2em; margin: 10px; background-color:}	 	/* class con stile del bottone*/
+.bb_0 {font-family: Courier; letter-spacing: 2px; font-size: 150%}
+
+ </style>
+
+<nav>
+<a style="font-weight: bold;" href="../index.html">HOME</a>
+</nav>
+
+<hr style="width: 100%; height: 2px;"><br>
+
+<!-- USA QUESTO FILE HTML COME TEMPLATE - INSERISCI  	BODY E SCRIPT 	DEI NUOVI PROGRAMMI DA QUI IN POI  fino a </script></body> -->
+<body>
+
+<p id="nomeId" style="color:blue; font-weight:bold; text-align:center; font-size: 300%; background: orange"></p>
+
+    <script>
+
+// Genera tre numeri casuali tra 10 e 99
+const numero1 = Math.floor(Math.random() * 90)+10;
+const numero2 = Math.floor(Math.random() * 90)+10;
+const numero3 = Math.floor(Math.random() * 90)+10;
+
+
+// Calcola la sottrazione e la somma
+risultatoSomma = numero1 - numero2 + numero3;
+
+// Crea il messaggio da mostrare
+messaggio =  numero1+" - "+numero2+" + "+numero3;
+
+// Visualizza il messaggio
+document.getElementById('nomeId').innerHTML=messaggio
+
+// Nasconde la visualizzazione del messaggio dopo 3 secondi
+setTimeout(function(){document.getElementById('nomeId').style.opacity = 0}, 3000);
+
+tempo1=performance.now()
+
+// ritarda 3 sec. tutto il rimanente programma, per permettere al messaggio di essere visibile a video 3 sec.
+ setTimeout(function(){
+
+// Mostra i numeri e chiedi all'utente di indovinare il risultato
+rispostaUtente = prompt(`Calcola...`);
+
+tempo2=performance.now()
+
+// Mostra il risultato
+alert("Risultato corretto: "+risultatoSomma+". "+" Hai risposto: "+rispostaUtente);
+if (parseInt(rispostaUtente) === risultatoSomma) {
+    alert("Complimenti! Hai indovinato"+"\n\n"+"tempo impiegato: "+Math.floor((tempo2-tempo1)/1000)+ " secondi "+"\n\n"+ "Per giocare ancora ricarica la pagina");
+} else {
+    alert("Peccato, non hai indovinato "+"\n\n"+"Per giocare ancora ricarica la pagina");
+}
+
+}, 3050);
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+<!--
+Domanda a ChatGPT:
+Genera un programma in javascript che genera tre numeri casuali fra 10 e 99, in cui il secondo numero è sottratto al primo e il terzo numero è sommato ai primi due.
+Mostra tale sottrazione e somma dei tre numeri all'utente, e chiedigli di indovinare il risultato.
+Dopo l'input dell'utente, mostra il risultato corretto.
+
+Questo programma è una modifica, piuttosto estesa, del programma generato da ChatGPT
+
+
+// Funzione per generare un numero casuale tra un minimo e un massimo
+function generaNumeroCasuale(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Genera tre numeri casuali tra 10 e 99
+const numero1 = generaNumeroCasuale(10, 99);
+const numero2 = generaNumeroCasuale(10, 99);
+const numero3 = generaNumeroCasuale(10, 99);
+
+// Calcola la sottrazione e la somma
+const risultatoSomma = numero1 - numero2 + numero3;
+
+// Mostra i numeri e chiedi all'utente di indovinare il risultato
+alert (`Calcola ${numero1} - ${numero2} + ${numero3}`);
+const rispostaUtente = prompt(`Calcola...`);
+
+// Mostra il risultato corretto
+alert(`Il risultato corretto è: ${risultatoSomma}. Hai risposto: ${rispostaUtente}`);
+if (parseInt(rispostaUtente) === risultatoSomma) {
+    alert("Complimenti! Hai indovinato.");
+} else {
+    alert("Peccato, non hai indovinato. Ritenta!");
+}
+-->
+
+<!--
+Domanda a ChatGPT:
+Genera un programma in javascript che genera un alert che dice "viva l'italia" e dopo 3 secondi scompare, anche senza input dell'utente
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viva l'Italia</title>
+    <style>
+        #custom-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            z-index: 1000;
+            display: none;
+        }
+        #custom-alert.show {
+            display: block;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        #overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay"></div>
+    <div id="custom-alert">
+        <p>Viva l'Italia</p>
+    </div>
+
+    <script>
+        function showCustomAlert() {
+            const alertBox = document.getElementById('custom-alert');
+            const overlay = document.getElementById('overlay');
+
+            // Mostra l'alert
+            alertBox.classList.add('show');
+            overlay.classList.add('show');
+
+            // Nasconde l'alert dopo 3 secondi
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+                overlay.classList.remove('show');
+            }, 3000);
+        }
+
+        // Mostra l'alert automaticamente
+        showCustomAlert();
+    </script>
+</body>
+</html>
+
+-->
